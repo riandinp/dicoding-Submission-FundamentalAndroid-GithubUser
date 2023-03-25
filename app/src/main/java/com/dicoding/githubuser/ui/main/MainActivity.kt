@@ -1,6 +1,8 @@
 package com.dicoding.githubuser.ui.main
 
 import android.app.SearchManager
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.viewModels
@@ -17,6 +19,14 @@ import com.dicoding.githubuser.ui.adapter.ListUserAdapter
 import com.dicoding.githubuser.ui.detail.DetailUserActivity
 
 class MainActivity : AppCompatActivity(), ListUserAdapter.OnUserItemClick {
+
+    companion object {
+        @JvmStatic
+        fun start(context: Context) {
+            val starter = Intent(context, MainActivity::class.java)
+            context.startActivity(starter)
+        }
+    }
 
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel by viewModels<MainViewModel>()

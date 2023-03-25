@@ -17,4 +17,5 @@
     <string name="no_bio">Tidak ada Bio</string>
     <string name="following_example">8 Following</string>
     <string name="followers_example">5 Followers</string>
+    <string name="github_logo">logo github</string>
 </resources>

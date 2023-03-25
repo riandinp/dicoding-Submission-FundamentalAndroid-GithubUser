@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_f5f5f5">#FFF5F5F5</color>
     <color name="grey_757575">#757575</color>
 
     <color name="brown_700">#5D4037</color> <!-- Dark Primary Color -->
