@@ -80,12 +80,12 @@ class DetailUserActivity : AppCompatActivity() {
                 .into(ivProfilePicture)
             tvIdUser.text = getString(R.string.user_id, user?.id.toString())
             tvUsername.text = user?.login
-            tvFullName.text = user?.name ?:"-"
-            tvDescription.text = user?.bio ?:"-"
+            tvFullName.text = user?.name ?:getString(R.string.no_name)
+            tvDescription.text = user?.bio ?:getString(R.string.no_bio)
             tvFollowing.text =
-                getString(R.string.following, user?.following)
+                getString(R.string.following, user?.following ?:0)
             tvFollowers.text =
-                getString(R.string.followers, user?.followers)
+                getString(R.string.followers, user?.followers ?:0)
         }
     }
 

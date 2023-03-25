@@ -16,7 +16,7 @@
         app:tabTextColor="?attr/colorSecondaryVariant"
         app:tabMaxWidth="0dp"
         app:tabMode="fixed"
-        app:tabTextAppearance="@style/TextViewTab" />
+        app:tabTextAppearance="@style/TextTabLayout" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_following_followers"

@@ -22,7 +22,7 @@
         android:id="@+id/tv_no_data_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tidak_ada_data_user_github"
+        android:text="@string/no_github_userdata"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

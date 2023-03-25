@@ -82,30 +82,33 @@ class ListFollowFragment : Fragment(), ListUserAdapter.OnUserItemClick {
     private fun setListFollowing(list: List<UserItem>?) {
         with(binding) {
             if(list.isNullOrEmpty()) {
-                rvListUser.isVisible = false
                 tvEmptyState.apply {
                     text = when(page) {
                         1 -> getString(R.string.no_following)
                         2 -> getString(R.string.no_followers)
-                        else -> getString(R.string.tidak_ada_data)
+                        else -> getString(R.string.no_data)
                     }
                     isVisible = true
                 }
+                initAdapter(listOf())
 
             } else {
                 tvEmptyState.isVisible = false
-                rvListUser.apply {
-                    adapter = ListUserAdapter(list, this@ListFollowFragment)
-                    val manager = LinearLayoutManager(requireActivity())
-                    layoutManager = manager
-                    addItemDecoration(DividerItemDecoration(requireActivity(), manager.orientation))
-                }
+                initAdapter(list)
             }
+        }
+    }
+
+    private fun initAdapter(newList: List<UserItem>) {
+        binding.rvListUser.apply {
+            adapter = ListUserAdapter(newList, this@ListFollowFragment)
+            val manager = LinearLayoutManager(requireActivity())
+            layoutManager = manager
+            addItemDecoration(DividerItemDecoration(requireActivity(), manager.orientation))
         }
     }
 
     override fun onUserItemClick(username: String) {
         DetailUserActivity.start(requireContext(), username)
     }
-
 }
