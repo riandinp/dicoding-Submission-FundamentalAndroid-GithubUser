@@ -8,4 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey_757575">#757575</color>
+
+    <color name="brown_700">#5D4037</color> <!-- Dark Primary Color -->
+    <color name="brown_500">#795548</color> <!-- Primary Color/Accent Color -->
+    <color name="brown_100">#D7CCC8</color> <!-- Light Primary Color -->
+    <color name="grey_600">#757575</color>  <!-- Secondary Text -->
+    <color name="grey_400">#BDBDBD</color>  <!-- Divider Color -->
+    <color name="black_900">#212121</color> <!-- Primary Text -->
 </resources>
