@@ -1,4 +1,4 @@
-package com.dicoding.githubuser.adapter
+package com.dicoding.githubuser.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +9,14 @@ import com.dicoding.githubuser.R
 import com.dicoding.githubuser.databinding.ItemUserBinding
 import com.dicoding.githubuser.response.UserItem
 
-class ListUserAdapter(private val listUser: List<UserItem>) :
-    RecyclerView.Adapter<ListUserAdapter.ViewHolder>() {
+class ListUserAdapter(
+    private val listUser: List<UserItem>,
+    private val listener: OnUserItemClick? = null
+) : RecyclerView.Adapter<ListUserAdapter.ViewHolder>() {
+
+    interface OnUserItemClick {
+        fun onUserItemClick(username: String)
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemUserBinding.bind(itemView)
@@ -21,6 +27,10 @@ class ListUserAdapter(private val listUser: List<UserItem>) :
                 Glide.with(itemView)
                     .load(item.avatarUrl)
                     .into(ivProfilePicture)
+
+                root.setOnClickListener {
+                    listener?.onUserItemClick(item.login)
+                }
             }
         }
     }

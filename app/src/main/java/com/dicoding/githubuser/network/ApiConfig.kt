@@ -1,6 +1,6 @@
-package com.dicoding.githubuser
+package com.dicoding.githubuser.network
 
-import com.dicoding.githubuser.network.GithubApiService
+import com.dicoding.githubuser.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

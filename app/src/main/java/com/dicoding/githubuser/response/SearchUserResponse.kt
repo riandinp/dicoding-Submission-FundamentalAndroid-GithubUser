@@ -3,6 +3,13 @@ package com.dicoding.githubuser.response
 import com.google.gson.annotations.SerializedName
 
 data class SearchUserResponse(
+
+	@field:SerializedName("message")
+	val message: String? = null,
+
+	@field:SerializedName("documentation_url")
+	val documentationUrl: String? = null,
+
 	@field:SerializedName("total_count")
 	val totalCount: Int,
 

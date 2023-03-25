@@ -2,6 +2,7 @@
     <string name="app_name">Github User</string>
     <string name="github_welcome">Selamat Datang di Github User App</string>
     <string name="tidak_ada_data_user_github">Tidak Ada Data User Github</string>
+    <string name="tidak_ada_data">Tidak Ada Data</string>
     <string name="username">Username</string>
     <string name="search">search</string>
     <string name="search_user_hint">Ketik Username Disini</string>
@@ -11,6 +12,7 @@
     <string name="list_follow_followers">List %1$s %2$s</string>
     <string name="detail_user">Detail User</string>
     <string name="no_following">Tidak ada Following</string>
+    <string name="no_followers">Tidak ada Followers</string>
     <string name="following_example">8 Following</string>
     <string name="followers_example">5 Followers</string>
 </resources>
