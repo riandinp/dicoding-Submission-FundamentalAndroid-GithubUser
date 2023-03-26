@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.getSystemService
 import androidx.core.view.isVisible
@@ -15,18 +14,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.githubuser.R
 import com.dicoding.githubuser.databinding.ActivityMainBinding
 import com.dicoding.githubuser.response.UserItem
+import com.dicoding.githubuser.ui.BaseActivity
 import com.dicoding.githubuser.ui.adapter.ListUserAdapter
 import com.dicoding.githubuser.ui.detail.DetailUserActivity
 
-class MainActivity : AppCompatActivity(), ListUserAdapter.OnUserItemClick {
+class MainActivity : BaseActivity<ActivityMainBinding>(), ListUserAdapter.OnUserItemClick {
 
-    private lateinit var binding: ActivityMainBinding
     private val mainViewModel by viewModels<MainViewModel>()
+
+    override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         binding.tvWelcome.isVisible = true
         initObserver()
     }

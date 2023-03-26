@@ -6,29 +6,27 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.addCallback
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.dicoding.githubuser.R
 import com.dicoding.githubuser.databinding.ActivityDetailUserBinding
 import com.dicoding.githubuser.response.DetailUserResponse
+import com.dicoding.githubuser.ui.BaseActivity
 import com.dicoding.githubuser.ui.adapter.FollowPagerAdapter
 import com.dicoding.githubuser.ui.main.MainViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
-class DetailUserActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityDetailUserBinding
+class DetailUserActivity : BaseActivity<ActivityDetailUserBinding>() {
 
     private val username by lazy { intent.getStringExtra(USERNAME) }
 
     private val mainViewModel by viewModels<MainViewModel>()
 
+    override fun getViewBinding(): ActivityDetailUserBinding = ActivityDetailUserBinding.inflate(layoutInflater)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailUserBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         supportActionBar?.title = getString(R.string.detail_user)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
