@@ -1,1 +1,1 @@
-# dicoding-Submission-FundamentalAndroid-GithubUser
+# dicoding-SubmissionFundamentalAndroid
