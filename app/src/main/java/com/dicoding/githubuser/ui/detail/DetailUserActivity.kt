@@ -53,6 +53,11 @@ class DetailUserActivity : BaseActivity<ActivityDetailUserBinding>() {
         mainViewModel.detailUser.observe(this) {
             setDetailUser(it)
         }
+        mainViewModel.toastText.observe(this) {
+            it.getContentIfNotHandled()?.let { toastText ->
+                showToast(toastText)
+            }
+        }
     }
 
     private fun setDetailUser(user: DetailUserResponse?) {

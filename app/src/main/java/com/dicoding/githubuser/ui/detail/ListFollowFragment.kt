@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -36,9 +37,9 @@ class ListFollowFragment : Fragment(), ListUserAdapter.OnUserItemClick {
         super.onViewCreated(view, savedInstanceState)
         initObserver()
 
-        when(page) {
-            1 -> mainViewModel.getFollowing(username ?:"")
-            2 -> mainViewModel.getFollowers(username ?:"")
+        when (page) {
+            1 -> mainViewModel.getFollowing(username ?: "")
+            2 -> mainViewModel.getFollowers(username ?: "")
         }
     }
 
@@ -54,6 +55,11 @@ class ListFollowFragment : Fragment(), ListUserAdapter.OnUserItemClick {
         mainViewModel.listFollowers.observe(viewLifecycleOwner) {
             setListFollowing(it)
         }
+        mainViewModel.toastText.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { toastText ->
+                Toast.makeText(requireContext(), toastText, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun showLoading(value: Boolean) {
@@ -66,9 +72,9 @@ class ListFollowFragment : Fragment(), ListUserAdapter.OnUserItemClick {
 
     private fun setListFollowing(list: List<UserItem>?) {
         with(binding) {
-            if(list.isNullOrEmpty()) {
+            if (list.isNullOrEmpty()) {
                 tvEmptyState.apply {
-                    text = when(page) {
+                    text = when (page) {
                         1 -> getString(R.string.no_following)
                         2 -> getString(R.string.no_followers)
                         else -> getString(R.string.no_data)

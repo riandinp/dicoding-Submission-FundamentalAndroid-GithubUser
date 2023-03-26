@@ -60,6 +60,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), ListUserAdapter.OnUser
         mainViewModel.listSearch.observe(this) {
             setListUsers(it)
         }
+        mainViewModel.toastText.observe(this) {
+            it.getContentIfNotHandled()?.let { toastText ->
+                showToast(toastText)
+            }
+        }
     }
 
     private fun setListUsers(listUsers: List<UserItem>?) {

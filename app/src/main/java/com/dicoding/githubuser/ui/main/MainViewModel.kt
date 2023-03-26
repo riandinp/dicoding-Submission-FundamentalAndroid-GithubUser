@@ -8,6 +8,7 @@ import com.dicoding.githubuser.network.ApiConfig
 import com.dicoding.githubuser.response.DetailUserResponse
 import com.dicoding.githubuser.response.SearchUserResponse
 import com.dicoding.githubuser.response.UserItem
+import com.dicoding.githubuser.utils.Event
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +33,9 @@ class MainViewModel : ViewModel() {
     private val _listFollowers = MutableLiveData<List<UserItem>>()
     val listFollowers: LiveData<List<UserItem>> = _listFollowers
 
+    private val _toastText = MutableLiveData<Event<String>>()
+    val toastText: LiveData<Event<String>> = _toastText
+
     fun postSearchuser(userName: String) {
         _isLoading.value = true
 
@@ -47,12 +51,14 @@ class MainViewModel : ViewModel() {
                     _listSearch.value = responseBody.items
                 } else {
                     Log.e(TAG, "onFailure: ${responseBody?.message}")
+                    _toastText.value = Event("onFailure: ${responseBody?.message}")
                 }
             }
 
             override fun onFailure(call: Call<SearchUserResponse>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message}")
+                _toastText.value = Event("onFailure: ${t.message}")
             }
         })
     }
@@ -70,12 +76,14 @@ class MainViewModel : ViewModel() {
                     _detailUser.value = response.body()
                 } else {
                     Log.e(TAG, "onFailure: ${response.body()?.message}")
+                    _toastText.value = Event("onFailure: ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message}")
+                _toastText.value = Event("onFailure: ${t.message}")
             }
         })
     }
@@ -94,12 +102,14 @@ class MainViewModel : ViewModel() {
                     _listFollowing.value = response.body()
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
+                    _toastText.value = Event("onFailure: ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<List<UserItem>>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message}")
+                _toastText.value = Event("onFailure: ${t.message}")
             }
         })
     }
@@ -118,12 +128,14 @@ class MainViewModel : ViewModel() {
                     _listFollowers.value = response.body()
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
+                    _toastText.value = Event("onFailure: ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<List<UserItem>>, t: Throwable) {
                 _isLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message}")
+                _toastText.value = Event("onFailure: ${t.message}")
             }
         })
     }
