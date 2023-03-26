@@ -20,14 +20,6 @@ import com.dicoding.githubuser.ui.detail.DetailUserActivity
 
 class MainActivity : AppCompatActivity(), ListUserAdapter.OnUserItemClick {
 
-    companion object {
-        @JvmStatic
-        fun start(context: Context) {
-            val starter = Intent(context, MainActivity::class.java)
-            context.startActivity(starter)
-        }
-    }
-
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel by viewModels<MainViewModel>()
 
@@ -100,5 +92,13 @@ class MainActivity : AppCompatActivity(), ListUserAdapter.OnUserItemClick {
 
     override fun onUserItemClick(username: String) {
         DetailUserActivity.start(this@MainActivity, username)
+    }
+
+    companion object {
+        @JvmStatic
+        fun start(context: Context) {
+            val starter = Intent(context, MainActivity::class.java)
+            context.startActivity(starter)
+        }
     }
 }

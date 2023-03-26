@@ -1,6 +1,7 @@
 package com.dicoding.githubuser.network
 
 import com.dicoding.githubuser.BuildConfig
+import com.dicoding.githubuser.utils.Constants
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -18,7 +19,7 @@ object ApiConfig {
         val authInterceptor = Interceptor { chain ->
             val req = chain.request()
             val requestHeaders = req.newBuilder()
-                .addHeader("Authorization", BuildConfig.KEY)
+                .addHeader(Constants.TYPE_HEADERS, BuildConfig.KEY)
                 .build()
             chain.proceed(requestHeaders)
         }
@@ -28,7 +29,7 @@ object ApiConfig {
             .addInterceptor(authInterceptor)
             .build()
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.github.com/")
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

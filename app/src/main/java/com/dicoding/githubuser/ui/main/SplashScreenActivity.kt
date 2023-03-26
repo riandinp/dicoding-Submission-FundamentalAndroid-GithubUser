@@ -7,6 +7,7 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.githubuser.databinding.ActivitySplashScreenBinding
+import com.dicoding.githubuser.utils.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -34,7 +35,7 @@ class SplashScreenActivity : AppCompatActivity() {
         }
 
         activityScope.launch {
-            delay(2000)
+            delay(Constants.DELAY_SPLASH_SCREEN)
             runOnUiThread {
                 MainActivity.start(this@SplashScreenActivity)
                 finish()

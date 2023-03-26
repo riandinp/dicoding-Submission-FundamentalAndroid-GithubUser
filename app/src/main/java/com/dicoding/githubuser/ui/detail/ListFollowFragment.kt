@@ -17,21 +17,6 @@ import com.dicoding.githubuser.ui.main.MainViewModel
 
 class ListFollowFragment : Fragment(), ListUserAdapter.OnUserItemClick {
 
-    companion object {
-        fun newInstance(page: Int, username: String): ListFollowFragment {
-            val args = Bundle().apply {
-                putString(USERNAME, username)
-                putInt(PAGE, page)
-            }
-            val fragment = ListFollowFragment()
-            fragment.arguments = args
-            return fragment
-        }
-
-        private const val USERNAME = "username"
-        private const val PAGE = "page"
-    }
-
     private lateinit var binding: FragmentListFollowBinding
 
     private val username by lazy { arguments?.getString(USERNAME) }
@@ -110,5 +95,20 @@ class ListFollowFragment : Fragment(), ListUserAdapter.OnUserItemClick {
 
     override fun onUserItemClick(username: String) {
         DetailUserActivity.start(requireContext(), username)
+    }
+
+    companion object {
+        fun newInstance(page: Int, username: String): ListFollowFragment {
+            val args = Bundle().apply {
+                putString(USERNAME, username)
+                putInt(PAGE, page)
+            }
+            val fragment = ListFollowFragment()
+            fragment.arguments = args
+            return fragment
+        }
+
+        private const val USERNAME = "username"
+        private const val PAGE = "page"
     }
 }

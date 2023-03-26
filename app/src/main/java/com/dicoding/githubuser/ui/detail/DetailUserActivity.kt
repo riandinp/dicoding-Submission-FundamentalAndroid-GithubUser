@@ -19,22 +19,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailUserActivity : AppCompatActivity() {
 
-    companion object {
-        @JvmStatic
-        fun start(context: Context, username: String) {
-            val starter = Intent(context, DetailUserActivity::class.java)
-                .putExtra(USERNAME, username)
-            context.startActivity(starter)
-        }
-
-        private val TAB_TITLES = arrayListOf(
-            "Following",
-            "Followers"
-        )
-
-        private const val USERNAME = "username"
-    }
-
     private lateinit var binding: ActivityDetailUserBinding
 
     private val username by lazy { intent.getStringExtra(USERNAME) }
@@ -104,5 +88,21 @@ class DetailUserActivity : AppCompatActivity() {
             finish()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    companion object {
+        @JvmStatic
+        fun start(context: Context, username: String) {
+            val starter = Intent(context, DetailUserActivity::class.java)
+                .putExtra(USERNAME, username)
+            context.startActivity(starter)
+        }
+
+        private val TAB_TITLES = arrayListOf(
+            "Following",
+            "Followers"
+        )
+
+        private const val USERNAME = "username"
     }
 }
