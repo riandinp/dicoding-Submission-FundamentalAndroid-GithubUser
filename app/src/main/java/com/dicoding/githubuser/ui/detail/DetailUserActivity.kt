@@ -3,6 +3,7 @@ package com.dicoding.githubuser.ui.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.addCallback
 import androidx.activity.viewModels
@@ -15,6 +16,7 @@ import com.dicoding.githubuser.response.DetailUserResponse
 import com.dicoding.githubuser.ui.BaseActivity
 import com.dicoding.githubuser.ui.adapter.FollowPagerAdapter
 import com.dicoding.githubuser.ui.main.MainViewModel
+import com.dicoding.githubuser.ui.settings.SettingsActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailUserActivity : BaseActivity<ActivityDetailUserBinding>() {
@@ -83,9 +85,16 @@ class DetailUserActivity : BaseActivity<ActivityDetailUserBinding>() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.detail_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             onBackPressedDispatcher.onBackPressed()
+        } else if (item.itemId == R.id.setting) {
+            SettingsActivity.start(this@DetailUserActivity)
         }
         onBackPressedDispatcher.addCallback(this@DetailUserActivity) {
             finish()

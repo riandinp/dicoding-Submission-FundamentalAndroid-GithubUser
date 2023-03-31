@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.getSystemService
@@ -17,10 +18,12 @@ import com.dicoding.githubuser.response.UserItem
 import com.dicoding.githubuser.ui.BaseActivity
 import com.dicoding.githubuser.ui.adapter.ListUserAdapter
 import com.dicoding.githubuser.ui.detail.DetailUserActivity
+import com.dicoding.githubuser.ui.settings.SettingsActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>(), ListUserAdapter.OnUserItemClick {
 
     private val mainViewModel by viewModels<MainViewModel>()
+
 
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -44,11 +47,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), ListUserAdapter.OnUser
                 mainViewModel.postSearchuser(query)
                 return false
             }
+
             override fun onQueryTextChange(newText: String): Boolean {
                 return false
             }
         })
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.setting) {
+            SettingsActivity.start(this@MainActivity)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 
@@ -69,9 +80,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), ListUserAdapter.OnUser
 
     private fun setListUsers(listUsers: List<UserItem>?) {
         with(binding) {
-            if(listUsers.isNullOrEmpty()) {
+            if (listUsers.isNullOrEmpty()) {
                 tvNoDataUser.isVisible = true
-                rvListUser.isVisible  = false
+                rvListUser.isVisible = false
             } else {
                 tvNoDataUser.isVisible = false
                 val manager = LinearLayoutManager(this@MainActivity)

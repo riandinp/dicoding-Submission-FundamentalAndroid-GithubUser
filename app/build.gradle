@@ -63,6 +63,12 @@ dependencies {
     //Coordinator Layout
     implementation "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
 
+    //Datastore preferences
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    //Lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
