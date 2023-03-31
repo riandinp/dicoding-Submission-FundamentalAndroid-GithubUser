@@ -54,5 +54,10 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        activityScope.coroutineContext.cancelChildren()
+    }
+
     override fun getViewBinding(): ActivitySplashScreenBinding = ActivitySplashScreenBinding.inflate(layoutInflater)
 }
