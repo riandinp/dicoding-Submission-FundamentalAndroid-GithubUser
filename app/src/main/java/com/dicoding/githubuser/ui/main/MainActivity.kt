@@ -113,6 +113,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), ListUserAdapter.OnUser
         @JvmStatic
         fun start(context: Context) {
             val starter = Intent(context, MainActivity::class.java)
+            starter.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             context.startActivity(starter)
         }
     }
