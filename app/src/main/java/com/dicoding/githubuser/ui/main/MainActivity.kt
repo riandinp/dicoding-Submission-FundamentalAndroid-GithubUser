@@ -29,6 +29,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), ListUserAdapter.OnUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(binding.root)
         binding.tvWelcome.isVisible = true
         initObserver()
     }
@@ -113,7 +114,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), ListUserAdapter.OnUser
         @JvmStatic
         fun start(context: Context) {
             val starter = Intent(context, MainActivity::class.java)
-            starter.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             context.startActivity(starter)
         }
     }

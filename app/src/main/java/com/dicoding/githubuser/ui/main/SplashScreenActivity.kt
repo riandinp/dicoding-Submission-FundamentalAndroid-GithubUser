@@ -14,6 +14,7 @@ import com.dicoding.githubuser.preferences.dataStore
 import com.dicoding.githubuser.ui.BaseActivity
 import com.dicoding.githubuser.ui.settings.SettingViewModel
 import com.dicoding.githubuser.utils.Constants
+import com.dicoding.githubuser.utils.isDarkModeOn
 import kotlinx.coroutines.*
 
 @SuppressLint("CustomSplashScreen")
@@ -37,12 +38,13 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
 
         val pref = SettingPreferences.getInstance(dataStore)
         val settingViewModel by viewModels<SettingViewModel> { SettingViewModelFactory(pref) }
-        settingViewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
+        settingViewModel.getThemeSettings(isDarkModeOn()).observe(this) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
+            setContentView(binding.root)
         }
 
         activityScope.launch {

@@ -8,8 +8,8 @@ import com.dicoding.githubuser.preferences.SettingPreferences
 import kotlinx.coroutines.launch
 
 class SettingViewModel(private val pref: SettingPreferences) : ViewModel() {
-    fun getThemeSettings(): LiveData<Boolean> {
-        return pref.getThemeSetting().asLiveData()
+    fun getThemeSettings(deviceTheme: Boolean = false): LiveData<Boolean> {
+        return pref.getThemeSetting(deviceTheme).asLiveData()
     }
 
     fun saveThemeSetting(isDarkModeActive: Boolean) {

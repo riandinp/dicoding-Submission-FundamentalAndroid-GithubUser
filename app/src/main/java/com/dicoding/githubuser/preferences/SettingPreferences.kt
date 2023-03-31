@@ -9,9 +9,9 @@ import kotlinx.coroutines.flow.map
 
 class SettingPreferences private constructor(private val dataStore: DataStore<Preferences>) {
 
-    fun getThemeSetting(): Flow<Boolean> {
+    fun getThemeSetting(deviceTheme: Boolean = false): Flow<Boolean> {
         return dataStore.data.map { preferences ->
-            preferences[THEME_KEY] ?: false
+            preferences[THEME_KEY] ?: deviceTheme
         }
     }
 

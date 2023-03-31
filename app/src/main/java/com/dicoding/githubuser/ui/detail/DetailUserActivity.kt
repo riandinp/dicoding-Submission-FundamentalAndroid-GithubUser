@@ -29,6 +29,7 @@ class DetailUserActivity : BaseActivity<ActivityDetailUserBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(binding.root)
 
         supportActionBar?.title = getString(R.string.detail_user)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

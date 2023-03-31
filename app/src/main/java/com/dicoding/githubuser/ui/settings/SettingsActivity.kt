@@ -14,6 +14,7 @@ import com.dicoding.githubuser.preferences.SettingPreferences
 import com.dicoding.githubuser.preferences.SettingViewModelFactory
 import com.dicoding.githubuser.preferences.dataStore
 import com.dicoding.githubuser.ui.BaseActivity
+import com.dicoding.githubuser.utils.isDarkModeOn
 
 class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 
@@ -22,6 +23,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(binding.root)
 
         supportActionBar?.title = getString(R.string.settings)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -29,7 +31,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
         val pref = SettingPreferences.getInstance(dataStore)
         val settingViewModel by viewModels<SettingViewModel> { SettingViewModelFactory(pref) }
 
-        settingViewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
+        settingViewModel.getThemeSettings(isDarkModeOn()).observe(this) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 binding.switchTheme.isChecked = true
