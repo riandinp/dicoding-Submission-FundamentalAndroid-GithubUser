@@ -13,8 +13,8 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.githubuser.R
+import com.dicoding.githubuser.data.remote.response.UserItem
 import com.dicoding.githubuser.databinding.ActivityMainBinding
-import com.dicoding.githubuser.response.UserItem
 import com.dicoding.githubuser.ui.BaseActivity
 import com.dicoding.githubuser.ui.adapter.ListUserAdapter
 import com.dicoding.githubuser.ui.detail.DetailUserActivity

@@ -11,8 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.githubuser.R
+import com.dicoding.githubuser.data.remote.response.UserItem
 import com.dicoding.githubuser.databinding.FragmentListFollowBinding
-import com.dicoding.githubuser.response.UserItem
 import com.dicoding.githubuser.ui.adapter.ListUserAdapter
 import com.dicoding.githubuser.ui.main.MainViewModel
 

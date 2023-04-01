@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.githubuser.R
+import com.dicoding.githubuser.data.remote.response.UserItem
 import com.dicoding.githubuser.databinding.ItemUserBinding
-import com.dicoding.githubuser.response.UserItem
 
 class ListUserAdapter(
     private val listUser: List<UserItem>,
@@ -46,4 +46,11 @@ class ListUserAdapter(
     }
 
     override fun getItemCount(): Int = listUser.size
+//    fun setListFavorite(listUser: List<UserItemModel>) {
+//        val diffCallback = UserDiffCallback(mListUser, listUser)
+//        val diffResult = DiffUtil.calculateDiff(diffCallback)
+//        mListUser.clear()
+//        mListUser.addAll(listUser)
+//        diffResult.dispatchUpdatesTo(this)
+//    }
 }

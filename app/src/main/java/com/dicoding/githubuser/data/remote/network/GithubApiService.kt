@@ -1,8 +1,8 @@
-package com.dicoding.githubuser.network
+package com.dicoding.githubuser.data.remote.network
 
-import com.dicoding.githubuser.response.DetailUserResponse
-import com.dicoding.githubuser.response.SearchUserResponse
-import com.dicoding.githubuser.response.UserItem
+import com.dicoding.githubuser.data.remote.response.DetailUserResponse
+import com.dicoding.githubuser.data.remote.response.SearchUserResponse
+import com.dicoding.githubuser.data.remote.response.UserItem
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

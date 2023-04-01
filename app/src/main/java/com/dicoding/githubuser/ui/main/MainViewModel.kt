@@ -4,10 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dicoding.githubuser.network.ApiConfig
-import com.dicoding.githubuser.response.DetailUserResponse
-import com.dicoding.githubuser.response.SearchUserResponse
-import com.dicoding.githubuser.response.UserItem
+import com.dicoding.githubuser.data.remote.network.ApiConfig
+import com.dicoding.githubuser.data.remote.response.DetailUserResponse
+import com.dicoding.githubuser.data.remote.response.SearchUserResponse
+import com.dicoding.githubuser.data.remote.response.UserItem
 import com.dicoding.githubuser.utils.Event
 import retrofit2.Call
 import retrofit2.Callback

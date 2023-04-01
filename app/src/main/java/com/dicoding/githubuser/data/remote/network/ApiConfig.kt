@@ -1,4 +1,4 @@
-package com.dicoding.githubuser.network
+package com.dicoding.githubuser.data.remote.network
 
 import com.dicoding.githubuser.BuildConfig
 import com.dicoding.githubuser.utils.Constants

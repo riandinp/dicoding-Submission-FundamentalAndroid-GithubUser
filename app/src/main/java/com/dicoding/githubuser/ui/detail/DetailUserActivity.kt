@@ -12,8 +12,8 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.dicoding.githubuser.R
+import com.dicoding.githubuser.data.remote.response.DetailUserResponse
 import com.dicoding.githubuser.databinding.ActivityDetailUserBinding
-import com.dicoding.githubuser.response.DetailUserResponse
 import com.dicoding.githubuser.ui.BaseActivity
 import com.dicoding.githubuser.ui.adapter.FollowPagerAdapter
 import com.dicoding.githubuser.ui.main.MainViewModel
@@ -106,6 +106,7 @@ class DetailUserActivity : BaseActivity<ActivityDetailUserBinding>() {
     private fun showLoading(value: Boolean) {
         binding.apply {
             pbLoadingScreenDetail.isVisible = value
+            fabFavoriteUser.isVisible = !value
             clProfileContent.isInvisible = value
         }
     }

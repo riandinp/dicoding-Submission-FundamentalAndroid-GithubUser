@@ -132,5 +132,6 @@
         app:elevation="4dp"
         app:fabCustomSize="56dp"
         app:maxImageSize="32dp"
+        app:backgroundTint="@color/brown_700"
         app:srcCompat="@drawable/ic_favorite_border_24" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
