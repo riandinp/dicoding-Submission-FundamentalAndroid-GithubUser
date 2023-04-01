@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.addCallback
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
@@ -25,7 +26,8 @@ class DetailUserActivity : BaseActivity<ActivityDetailUserBinding>() {
 
     private val mainViewModel by viewModels<MainViewModel>()
 
-    override fun getViewBinding(): ActivityDetailUserBinding = ActivityDetailUserBinding.inflate(layoutInflater)
+    override fun getViewBinding(): ActivityDetailUserBinding =
+        ActivityDetailUserBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +39,28 @@ class DetailUserActivity : BaseActivity<ActivityDetailUserBinding>() {
         mainViewModel.getDetailUser(username ?: "")
         initPager()
         initObserver()
+
+        binding.fabFavoriteUser.apply {
+            setOnClickListener {
+                if (tag == "favorite") setFavoriteUser(false)
+                else setFavoriteUser(true)
+            }
+        }
+    }
+
+    private fun setFavoriteUser(value: Boolean) {
+        binding.fabFavoriteUser.apply {
+            if(value) {
+                tag = "favorite"
+                setImageDrawable(ContextCompat.getDrawable(this@DetailUserActivity,R.drawable.ic_favorite_24))
+                showToast("Added to Favorite")
+            } else {
+                tag = ""
+                setImageDrawable(ContextCompat.getDrawable(this@DetailUserActivity,R.drawable.ic_favorite_border_24))
+                showToast("Removed to Favorite")
+            }
+        }
+
     }
 
     private fun initPager() {
@@ -70,12 +94,12 @@ class DetailUserActivity : BaseActivity<ActivityDetailUserBinding>() {
                 .into(ivProfilePicture)
             tvIdUser.text = getString(R.string.user_id, user?.id.toString())
             tvUsername.text = user?.login
-            tvFullName.text = user?.name ?:getString(R.string.no_name)
-            tvDescription.text = user?.bio ?:getString(R.string.no_bio)
+            tvFullName.text = user?.name ?: getString(R.string.no_name)
+            tvDescription.text = user?.bio ?: getString(R.string.no_bio)
             tvFollowing.text =
-                getString(R.string.following, user?.following ?:0)
+                getString(R.string.following, user?.following ?: 0)
             tvFollowers.text =
-                getString(R.string.followers, user?.followers ?:0)
+                getString(R.string.followers, user?.followers ?: 0)
         }
     }
 
