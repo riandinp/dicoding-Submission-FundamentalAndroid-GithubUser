@@ -3,6 +3,7 @@ package com.dicoding.githubuser.ui.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.addCallback
@@ -12,10 +13,13 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.dicoding.githubuser.R
+import com.dicoding.githubuser.data.local.entity.FavoriteUser
 import com.dicoding.githubuser.data.remote.response.DetailUserResponse
 import com.dicoding.githubuser.databinding.ActivityDetailUserBinding
+import com.dicoding.githubuser.preferences.FavoriteUserViewModelFactory
 import com.dicoding.githubuser.ui.BaseActivity
 import com.dicoding.githubuser.ui.adapter.FollowPagerAdapter
+import com.dicoding.githubuser.ui.favorite.FavoriteUserActivity
 import com.dicoding.githubuser.ui.main.MainViewModel
 import com.dicoding.githubuser.ui.settings.SettingsActivity
 import com.google.android.material.tabs.TabLayoutMediator
@@ -25,6 +29,14 @@ class DetailUserActivity : BaseActivity<ActivityDetailUserBinding>() {
     private val username by lazy { intent.getStringExtra(USERNAME) }
 
     private val mainViewModel by viewModels<MainViewModel>()
+
+    private val detailViewModel by viewModels<DetailUserViewModel> {
+        FavoriteUserViewModelFactory.getInstance(
+            application
+        )
+    }
+
+    private lateinit var favoriteUser: FavoriteUser
 
     override fun getViewBinding(): ActivityDetailUserBinding =
         ActivityDetailUserBinding.inflate(layoutInflater)
@@ -40,27 +52,40 @@ class DetailUserActivity : BaseActivity<ActivityDetailUserBinding>() {
         initPager()
         initObserver()
 
+        Log.d("ini_log", username ?: "kosong")
         binding.fabFavoriteUser.apply {
             setOnClickListener {
-                if (tag == "favorite") setFavoriteUser(false)
-                else setFavoriteUser(true)
+                if (tag == "favorite") {
+                    detailViewModel.delete(favoriteUser)
+                    showToast(context.getString(R.string.remove_favorite_user))
+                } else {
+                    detailViewModel.insert(favoriteUser)
+                    showToast(context.getString(R.string.add_favorite_user))
+                }
             }
         }
     }
 
     private fun setFavoriteUser(value: Boolean) {
         binding.fabFavoriteUser.apply {
-            if(value) {
+            if (value) {
                 tag = "favorite"
-                setImageDrawable(ContextCompat.getDrawable(this@DetailUserActivity,R.drawable.ic_favorite_24))
-                showToast("Added to Favorite")
+                setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this@DetailUserActivity,
+                        R.drawable.ic_favorite_24
+                    )
+                )
             } else {
                 tag = ""
-                setImageDrawable(ContextCompat.getDrawable(this@DetailUserActivity,R.drawable.ic_favorite_border_24))
-                showToast("Removed to Favorite")
+                setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this@DetailUserActivity,
+                        R.drawable.ic_favorite_border_24
+                    )
+                )
             }
         }
-
     }
 
     private fun initPager() {
@@ -101,6 +126,11 @@ class DetailUserActivity : BaseActivity<ActivityDetailUserBinding>() {
             tvFollowers.text =
                 getString(R.string.followers, user?.followers ?: 0)
         }
+
+        favoriteUser = FavoriteUser(user?.id.toString(), user?.login, user?.avatarUrl)
+        detailViewModel.isFavorite(favoriteUser.userId).observe(this) {
+            setFavoriteUser(it)
+        }
     }
 
     private fun showLoading(value: Boolean) {
@@ -112,15 +142,22 @@ class DetailUserActivity : BaseActivity<ActivityDetailUserBinding>() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.detail_menu, menu)
+        menuInflater.inflate(R.menu.option_menu, menu)
+        menu.removeItem(R.id.search)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            onBackPressedDispatcher.onBackPressed()
-        } else if (item.itemId == R.id.setting) {
-            SettingsActivity.start(this@DetailUserActivity)
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressedDispatcher.onBackPressed()
+            }
+            R.id.favorite -> {
+                FavoriteUserActivity.start(this@DetailUserActivity)
+            }
+            R.id.setting -> {
+                SettingsActivity.start(this@DetailUserActivity)
+            }
         }
         onBackPressedDispatcher.addCallback(this@DetailUserActivity) {
             finish()

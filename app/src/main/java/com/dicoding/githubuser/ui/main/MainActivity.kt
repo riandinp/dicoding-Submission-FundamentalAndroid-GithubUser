@@ -18,6 +18,7 @@ import com.dicoding.githubuser.databinding.ActivityMainBinding
 import com.dicoding.githubuser.ui.BaseActivity
 import com.dicoding.githubuser.ui.adapter.ListUserAdapter
 import com.dicoding.githubuser.ui.detail.DetailUserActivity
+import com.dicoding.githubuser.ui.favorite.FavoriteUserActivity
 import com.dicoding.githubuser.ui.settings.SettingsActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>(), ListUserAdapter.OnUserItemClick {
@@ -59,6 +60,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), ListUserAdapter.OnUser
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.setting) {
             SettingsActivity.start(this@MainActivity)
+        } else if (item.itemId == R.id.favorite) {
+            FavoriteUserActivity.start(this@MainActivity)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -81,19 +84,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), ListUserAdapter.OnUser
 
     private fun setListUsers(listUsers: List<UserItem>?) {
         with(binding) {
-            if (listUsers.isNullOrEmpty()) {
-                tvNoDataUser.isVisible = true
-                rvListUser.isVisible = false
-            } else {
-                tvNoDataUser.isVisible = false
-                val manager = LinearLayoutManager(this@MainActivity)
-                val itemDecoration = DividerItemDecoration(this@MainActivity, manager.orientation)
-                rvListUser.apply {
-                    adapter = ListUserAdapter(listUsers, this@MainActivity)
-                    layoutManager = manager
-                    addItemDecoration(itemDecoration)
-                }
+            val manager = LinearLayoutManager(this@MainActivity)
+            val itemDecoration = DividerItemDecoration(this@MainActivity, manager.orientation)
+            rvListUser.apply {
+                adapter = ListUserAdapter(listUsers ?: emptyList(), this@MainActivity)
+                layoutManager = manager
+                addItemDecoration(itemDecoration)
             }
+            tvNoDataUser.isVisible = listUsers.isNullOrEmpty()
         }
     }
 

@@ -22,4 +22,7 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="favorite">favorite</string>
     <string name="favorite_user">Favorite User</string>
+    <string name="no_favorite_users">Tidak Ada Favorite User</string>
+    <string name="remove_favorite_user">Removed to Favorite Users</string>
+    <string name="add_favorite_user">Added to Favorite Users</string>
 </resources>

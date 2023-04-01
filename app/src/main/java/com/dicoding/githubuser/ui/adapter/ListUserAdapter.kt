@@ -46,11 +46,4 @@ class ListUserAdapter(
     }
 
     override fun getItemCount(): Int = listUser.size
-//    fun setListFavorite(listUser: List<UserItemModel>) {
-//        val diffCallback = UserDiffCallback(mListUser, listUser)
-//        val diffResult = DiffUtil.calculateDiff(diffCallback)
-//        mListUser.clear()
-//        mListUser.addAll(listUser)
-//        diffResult.dispatchUpdatesTo(this)
-//    }
 }
